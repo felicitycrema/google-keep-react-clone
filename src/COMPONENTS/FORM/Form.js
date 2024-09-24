@@ -5,7 +5,7 @@ import "./Form.css";
 export default function Form(props) {
   const { edit, selectedNote, toggleModal } = props;
   const [title, setTitle] = useState((edit && selectedNote.title) || "");
-  const [text, setText] = useState((edit && selectedNote.text) || ""); // Corrected to selectedNote.text
+  const [text, setText] = useState((edit && selectedNote.text) || "");
   const [isActiveForm, setActiveForm] = useState(edit);
 
   const titleChangeHandler = (event) => setTitle(event.target.value);
@@ -43,10 +43,7 @@ export default function Form(props) {
   return (
     <div>
       <div className="form-container active-form" onClick={formClickHandler}>
-        <form
-          onSubmit={submitFormHandler}
-          className={isActiveForm ? "form" : ""}
-        >
+        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""}>
           {isActiveForm && (
             <input
               onChange={titleChangeHandler}
@@ -56,7 +53,6 @@ export default function Form(props) {
               placeholder="Title"
             />
           )}
-
           <input
             onChange={textChangeHandler}
             value={text}
@@ -66,24 +62,22 @@ export default function Form(props) {
           />
           {isActiveForm ? (
             <div className="form-actions">
-              {/* Action icons */}
               <div className="icons">
                 {["add_alert", "person_add", "palette", "image", "archive", "more_vert", "undo", "redo"].map((icon) => (
                   <div className="tooltip" key={icon}>
                     <span className={`material-symbols-outlined hover small-icon`}>{icon}</span>
-                    <span className="tooltip-text">{icon.replace('_', ' ').capitalize()}</span>
+                    <span className="tooltip-text">{icon.replace("_", " ")}</span>
                   </div>
                 ))}
               </div>
-              <button className="close-btn">close</button>
+              <button className="close-btn" type="button" onClick={toggleModal}>close</button>
             </div>
           ) : (
             <div className="form-actions">
-              {/* New actions when form is inactive */}
               {["check_box", "brush", "image"].map((icon) => (
                 <div className="tooltip" key={icon}>
-                  <span className={`material-symbols-outlined hover`}>{icon}</span>
-                  <span className="tooltip-text">{icon.replace('_', ' ').capitalize()}</span>
+                  <span className="material-symbols-outlined hover">{icon}</span>
+                  <span className="tooltip-text">{icon.replace("_", " ")}</span>
                 </div>
               ))}
             </div>
